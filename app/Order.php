@@ -4,13 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Order extends Model
 {
-    public $timestamps = false;
-
-    public function category()
+    public function customer()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
    public function orderProducts()
