@@ -18,8 +18,8 @@ class FreeProductsDiscountTest extends TestCase
     {
         $freeProductsDiscount = new FreeProductsDiscount;
 
-        $order = factory(Order::class)->create()->each(function ($o) {
-                        $o->orderProducts()->save(factory(OrderProduct::class, 2)->make());
+        $order = factory(Order::class, 1)->create()->each(function ($o) {
+                        $o->orderProducts()->saveMany(factory(OrderProduct::class, 2)->make());
                     }
                 );
 

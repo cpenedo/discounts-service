@@ -18,13 +18,14 @@ class CreateOrderProductsTable extends Migration
 
             $table->integer('quantity');
             $table->decimal('unit_price', 8, 2);
+            $table->decimal('total', 8, 2);
 
             $table->unsignedInteger('order_id');
             $table->foreign('order_id')
                 ->references('id')
                 ->on('order');
 
-            $table->unsignedInteger('product_id');
+            $table->string('product_id');
             $table->foreign('product_id')
                 ->references('id')
                 ->on('product');
