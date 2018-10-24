@@ -15,9 +15,4 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
-
-    static public function a()
-    {
-        return 2;
-    }
 }

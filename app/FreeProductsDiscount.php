@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FreeProductDiscount extends Model
+class FreeProductsDiscount extends Model
 {
     public $cateboryId;
 

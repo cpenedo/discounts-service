@@ -10,12 +10,12 @@ class ProductPercentDiscount extends Model
 
     public $minimumAmount;
     
-    public $productDiscount;
+    public $percentDiscount;
 
-    public function _construct($categoryId = 1, $minimumAmount = 2, $productDiscount = 20)
+    public function _construct($categoryId = 1, $minimumAmount = 2, $percentDiscount = 20)
     {
         $this->categoryId = $categoryId;
         $this->minimumAount = $minimumAmount;
-        $this->productDiscount = $productDiscount;
+        $this->percentDiscount = $percentDiscount;
     }
 }
