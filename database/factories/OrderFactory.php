@@ -9,6 +9,6 @@ $factory->define(Order::class, function (Faker $faker) {
         'customer_id' => function() {
             return factory(Customer::class)->create()->id;
         },
-        'total' => $faker->randomFloat(2, 0, 9999),
+        'total' => $faker->randomFloat(2, 0, 9999)
     ];
 });

@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')
                 ->references('id')
-                ->on('category');
+                ->on('categories');
         });
     }
 

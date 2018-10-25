@@ -15,7 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('total', 8, 2);
+            $table->decimal('total', 8, 2)->nullable();
+            $table->decimal('total_discount', 8, 2)->nullable();
 
             $table->unsignedInteger('customer_id');
             $table->foreign('customer_id')
