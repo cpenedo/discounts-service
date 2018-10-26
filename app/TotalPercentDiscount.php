@@ -15,4 +15,13 @@ class TotalPercentDiscount extends Model
         $this->percentDiscount = $percentDiscount;
         $this->minimumOrderValue = $minimumOrderValue;
     }
+
+    public function calculate($orderValue)
+    {
+        if($orderValue >= $this->minimumOrderValue) {
+            return number_format($orderValue * (floatval($this->percentDiscount) / 100), 2);
+        }
+
+        return false;
+    }
 }

@@ -11,10 +11,14 @@ class Order extends Model
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
-   public function orderProducts()
-    {
-        return $this->hasMany(OrderProduct::class);
-    }
+   public function orderProducts($categoryId = null)
+   {
+        return is_null($categoryId) ? 
+            $this->hasMany(OrderProduct::class) : 
+            $this->hasMany(OrderProduct::class)
+                ->join('products', 'order_products.product_id', '=', 'products.id')
+                ->where('products.category_id', '=', $categoryId);
+   }
 
     public function validationRules()
     {
