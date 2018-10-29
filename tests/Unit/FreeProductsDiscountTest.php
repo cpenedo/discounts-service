@@ -48,13 +48,20 @@ class FreeProductsDiscountTest extends TestCase
     /** @test */
     public function calculate_free_products_discount()
     {
+        $discountValue = $this->orderProduct->product->price * 1;
+
         $discount[0]['product_id'] = $this->product->id;
         $discount[0]['free_quantity'] = 1;
-        $discount[0]['discount_value'] = $this->orderProduct->product->price * 1;
+        $discount[0]['discount_value'] = $discountValue;
 
         $this->assertEquals(
             $this->freeProductsDiscount->calculate($this->order),
             $discount
+        );
+
+        $this->assertEquals(
+            $this->product->orderProducts->first()->discount_value,
+            $discountValue
         );
     }
 }

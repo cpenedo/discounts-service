@@ -57,4 +57,16 @@ class Order extends Model
         return $message;
     }
 
+    public function refreshTotalValues($discountValue)
+    {
+        $this->total -= $discountValue;
+        $this->total_discount += $discountValue;
+        
+        if($this->save()) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

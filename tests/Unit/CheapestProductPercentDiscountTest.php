@@ -60,12 +60,20 @@ class CheapestProductPercentDiscountTest extends TestCase
     /** @test */
     public function calculate_cheapest_product_discount_value()
     {
+        $discountValue = $this->cheapestProduct->price * (20 / 100);
+
         $discount['product_id'] = $this->cheapestProduct->id;
-        $discount['discount_value'] = number_format($this->cheapestProduct->price * (floatval(20) / 100), 2);
+        $discount['discount_value'] = $discountValue;
         
         $this->assertEquals(
             $this->cheapestProductPercentDiscount->calculate($this->order),
             $discount
+        );
+
+        $this->assertEquals(
+            // $this->cheapestProduct->orderProducts->first()->discount_value,
+            $this->order->orderProducts->first()->discount_value,
+            $discountValue
         );
     }
 }

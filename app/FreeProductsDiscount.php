@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\OrderProductRepository;
 
 class FreeProductsDiscount extends Model
 {
@@ -35,21 +36,18 @@ class FreeProductsDiscount extends Model
 
                 while($quantity >= $this->minimumAmount) {
                     $freeProductsQuantity += $this->freeProducts;
-                    $quantity -= $this->freeProducts;
+                    $quantity -= $this->minimumAmount + $this->freeProducts;
                 }
 
-                $discountValue = $orderProduct->product->price * $freeProductsQuantity;
+                $discountValue = number_format($orderProduct->product->price * $freeProductsQuantity, 2);
 
                 $discount[$index]['product_id'] = $orderProduct->product_id;
                 $discount[$index]['free_quantity'] = $freeProductsQuantity;
                 $discount[$index]['discount_value'] = $discountValue;
 
-                $orderProduct->discount_value += $discountValue;
-                $orderProduct->save();
+                $orderProductObject = OrderProductRepository::getOrderProduct($orderProduct->order_id, $orderProduct->product_id);
 
-                $order->total -= $discountValue;
-                $order->total_discount += $discountValue;
-                $order->save();
+                $orderProductObject->storeDiscountValue($discountValue);
             }
         }
 

@@ -25,10 +25,14 @@ class CheapestProductPercentDiscount extends Model
 
     	if(count($orderProducts) >= $this->minimumAmount) {
 
-    		$cheapestProduct = $order->orderProducts($this->category_id)->orderBy('price', 'asc')->first();
+    		$cheapestOrderProduct = $order->orderProducts($this->category_id)->orderBy('price', 'asc')->first();
 
-            $discount['product_id'] = $cheapestProduct->product_id;
-            $discount['discount_value'] = number_format($cheapestProduct->product->price * (floatval($this->percentDiscount) / 100), 2);
+            $discountValue = number_format($cheapestOrderProduct->product->price * (floatval($this->percentDiscount) / 100), 2);
+
+            $discount['product_id'] = $cheapestOrderProduct->product_id;
+            $discount['discount_value'] = $discountValue;
+
+            $cheapestOrderProduct->storeDiscountValue($discountValue);
 
     		return $discount;
         }
